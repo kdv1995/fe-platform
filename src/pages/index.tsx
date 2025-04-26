@@ -1,10 +1,10 @@
 import { Card, Typography } from "antd";
 import { Content } from "antd/es/layout/layout";
 const { Title, Paragraph } = Typography;
-export default function IndexPage() {
+export function IndexPage() {
   return (
     <section>
-      <Content className="p-8 flex flex-col items-center">
+      <Content className="flex flex-col items-center mt-4">
         <Card className="max-w-max w-full">
           <Typography>
             <Title>Welcome to PDF Summarizer</Title>

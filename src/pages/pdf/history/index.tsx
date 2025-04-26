@@ -1,3 +1,9 @@
-export default function PdfHistoryPage() {
-  return <section></section>;
+import { History } from "@/features/pdf/history/ui";
+
+export function PdfHistoryPage() {
+  return (
+    <section>
+      <History />
+    </section>
+  );
 }

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const { Header } = Layout;
 
-const Navbar: FC = () => {
+export const Navbar: FC = () => {
   return (
     <Layout>
       <Header>
@@ -32,4 +32,3 @@ const Navbar: FC = () => {
   );
 };
 
-export default Navbar;

@@ -57,7 +57,7 @@ export const SummaryVisualizator: FC = () => {
         return [...prev, splitted[index]];
       });
       setIndex((prev) => prev + 1);
-    }, 500); // Typing speed (ms)
+    }, 400);
 
     return () => clearInterval(interval);
   }, [summary, index]);

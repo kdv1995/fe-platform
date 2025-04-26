@@ -8,8 +8,8 @@ export const uploadFile = async (file: File): Promise<string> => {
     headers: {
       "Content-Type": "multipart/form-data",
     },
-    responseType: "text", // Important: expect plain text
+    responseType: "text",
   });
 
-  return response.data; // The summary text
+  return response.data;
 };

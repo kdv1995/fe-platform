@@ -1,6 +1,6 @@
 import { Upload } from "@/features/pdf/upload/ui";
 
-export default function PdfUploadPage() {
+export function PdfUploadPage() {
   return (
     <section>
       <Upload />
