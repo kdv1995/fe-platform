@@ -20,6 +20,9 @@ export const useSummaryVisualizer = () => {
         setIsLoading(true);
 
         const text = await uploadFile(file as File);
+        if (!text) {
+          return message.error("Failed to summarize the file.");
+        }
         setSummary(text);
 
         setIsLoading(false);
