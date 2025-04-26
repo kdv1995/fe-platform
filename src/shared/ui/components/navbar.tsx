@@ -1,34 +1,25 @@
-import { FC } from "react";
-import { Layout, Menu } from "antd";
-import { Link } from "react-router-dom";
+import { FC, useState } from "react";
+import { Menu } from "antd";
+import { MenuProps } from "antd";
 
-const { Header } = Layout;
+import { useNavigate } from "react-router-dom";
+import { site } from "@/shared/config/menu";
 
 export const Navbar: FC = () => {
-  return (
-    <Layout>
-      <Header>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          selectable={false}
-          className="flex items-center gap-4"
-        >
-          <div>
-            <Menu.Item key="home">
-              <Link to="/">PDF Summarizer</Link>
-            </Menu.Item>
-          </div>
+  const [current, setCurrent] = useState("/");
+  const navigate = useNavigate();
 
-          <Menu.Item key="upload">
-            <Link to="/upload">Upload</Link>
-          </Menu.Item>
-          <Menu.Item key="history">
-            <Link to="/history">History</Link>
-          </Menu.Item>
-        </Menu>
-      </Header>
-    </Layout>
+  const onClick: MenuProps["onClick"] = (e) => {
+    console.log(e);
+    navigate(e.key);
+    setCurrent(e.key);
+  };
+  return (
+    <Menu
+      onClick={onClick}
+      selectedKeys={[current]}
+      mode="horizontal"
+      items={site.items}
+    />
   );
 };
-

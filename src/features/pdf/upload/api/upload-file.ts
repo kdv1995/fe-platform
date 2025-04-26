@@ -4,7 +4,7 @@ export const uploadFile = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await client.post<string>("/pdf/upload", formData, {
+  const response = await client.post("/pdf/upload", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
