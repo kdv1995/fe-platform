@@ -1,6 +1,6 @@
 # PDF Upload, OpenAI API summary generation and History display
 
-Technologies: React, Typescript + SWC, Tanstack Query, Ant Design, Vercel
+Technologies: React, Typescript + SWC, Tanstack Query, Ant Design, Tailwind, Vercel
 
 ## Local Project setup:
 
