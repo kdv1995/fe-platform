@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getHistory } from "../api/get-history";
-import { Button, Card, Col, Layout, Row } from "antd";
+import { Card, Col, Layout, Row } from "antd";
+import { DownloadButton } from "@/shared/ui/components/download-button";
 export const History = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["history"],
@@ -18,15 +19,10 @@ export const History = () => {
                   <strong>Created:</strong>{" "}
                   {new Date(item.created_at).toLocaleString()}
                 </p>
-                <Button
-                  type="primary"
-                  className="mt-2"
-                  href={item.upload_url}
-                  target="_blank"
-                  download
-                >
-                  Download Summary
-                </Button>
+                <DownloadButton
+                  url={item.upload_url}
+                  filename={`${item.title}.txt`}
+                />
               </Card>
             </Col>
           ))}

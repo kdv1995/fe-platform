@@ -6,7 +6,8 @@ interface HistoryItem {
   created_at: string;
   upload_url: string;
 }
+
 export const getHistory = async () => {
-  const response = await client.get("pdf/history");
-  return response.data as HistoryItem[];
+  const response = await client.get<HistoryItem[]>("pdf/history");
+  return response.data;
 };
