@@ -10,7 +10,6 @@ export const Navbar: FC = () => {
   const navigate = useNavigate();
 
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log(e);
     navigate(e.key);
     setCurrent(e.key);
   };

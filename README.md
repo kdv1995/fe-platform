@@ -1,54 +1,151 @@
-# React + TypeScript + Vite
+# PDF Summary Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application that allows users to upload PDF documents and receive AI-generated summaries using OpenAI's API. The application also maintains a history of the last 5 processed documents.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend Framework**: React 19 with TypeScript
+- **Build Tool**: Vite with SWC
+- **State Management**: Tanstack Query
+- **UI Components**: Ant Design
+- **Styling**: Tailwind CSS
+- **Routing**: React Router v7
+- **HTTP Client**: Axios
+- **Deployment**: Vercel
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **PDF Upload**: Secure and efficient PDF file upload system
+- **AI Summary Generation**: Integration with OpenAI's API for intelligent document summarization
+- **History Tracking**: Display of the last 5 processed documents with their summaries
+- **Modern UI**: Clean and responsive design using Ant Design and Tailwind CSS
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Setup Instructions
+
+1. Clone the repository:
+
+```bash
+git clone [repository-url]
+cd fe-platform
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+3. Create environment file:
+
+```bash
+cp .env.example .env
+```
+
+4. Configure environment variables:
+
+```bash
+# Add backend API URL
+VITE_API_URL=""
+```
+
+5. Start development server:
+
+```bash
+npm run dev
+```
+
+## API Documentation
+
+### Upload PDF
+
+- **Endpoint**: `/pdf/upload`
+- **Method**: POST
+- **Content-Type**: multipart/form-data
+- **Request Body**:
+  ```json
+  {
+    "file": PDF_File
+  }
+  ```
+- **Response**:
+  ```text
+  summary: string
+  ```
+
+### Get History
+
+- **Endpoint**: `/pdf/history`
+- **Method**: GET
+- **Response**:
+  ```json
+    "documents": [
+      {
+        "id": "string",
+        "title": "string",
+        "upload_url": "string",
+        "timestamp": "string"
+      }
+    ]
+  ```
+
+## Docker Support
+
+While the primary deployment is through Vercel, a Docker configuration is provided for local development and testing:
+
+### Dockerfile
+
+```dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]
+```
+
+### docker-compose.yml
+
+```yaml
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+```
+
+To run with Docker:
+
+```bash
+docker-compose up --build
+```
+
+## Deployment
+
+The application is deployed on Vercel. The deployment process is automated through Vercel's platform:
+
+1. Connect your GitHub repository to Vercel
+2. Configure environment variables in Vercel dashboard
+3. Deployments will be automatically triggered on pushes to the main branch
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
